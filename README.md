@@ -1,6 +1,7 @@
-# flutter_app
+# flutter_app 杯子蛋糕
 
 A new Flutter application.
+用来测试flutter各种套路
 
 ## Getting Started
 
