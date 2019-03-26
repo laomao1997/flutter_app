@@ -3,6 +3,7 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/dio.dart';
 import 'ui/LoginPage.dart';
+import 'ui/WebViewPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -79,21 +80,21 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     SvgPicture cakeRectangle =
-    new SvgPicture.asset("assets/images/cake_rectangle.svg");
+        new SvgPicture.asset("assets/images/cake_rectangle.svg");
 
     return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
-        ),
-        body: Center(
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Center(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-            SizedBox(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(
             width: 50.0,
             height: 50.0,
             child: Image.asset("assets/images/cake_cup.png"),
@@ -133,10 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Text(
                 '$_counter',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .display1,
+                style: Theme.of(context).textTheme.display1,
               ),
               Text('次'),
             ],
@@ -172,17 +170,28 @@ class _MyHomePageState extends State<MyHomePage> {
               getHttp();
             },
           ),
+          RaisedButton(
+            color: Colors.blue,
+            child: Text("打开请求页面"),
+            highlightColor: Colors.blue[700],
+            colorBrightness: Brightness.dark,
+            textColor: Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            onPressed: () {
+              Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                return new WebViewPage();
+              }));
+            },
+          ),
           SwitchAndCheckBoxTestRoute(),
-          ],
-        )),
-    floatingActionButton: FloatingActionButton(
-    onPressed: _incrementCounter,
-    tooltip: 'Increment',
-    child: Icon(Icons.add
-    )
-    ,
-    )
-    , // This trailing comma makes auto-formatting nicer for build methods.
+        ],
+      )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
