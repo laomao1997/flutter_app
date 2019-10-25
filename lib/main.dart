@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_app/SpClient.dart';
+import 'package:flutter_app/model/Weather.dart';
 import 'ui/LoginPage.dart';
 import 'ui/WebViewPage.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -65,7 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
         "https://free-api.heweather.net/s6/weather/now?key=9b8e0d5e02244c0a9a6d22543afdc4a5&location=北京";
     try {
       Response response = await Dio().get(args);
-      print(response);
+      Weather weather = Weather.fromJson(response.data);
+      print(weather.heWeather6[0].basic.cid);
+      SpClient.sp.setString('cid', weather.heWeather6[0].basic.cid);
+      print(SpClient.sp.get('cid'));
     } catch (e) {
       print(e);
     }
@@ -79,8 +84,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    SvgPicture cakeRectangle =
-        new SvgPicture.asset("assets/images/cake_rectangle.svg");
+//    SvgPicture cakeRectangle =
+//        new SvgPicture.asset("assets/images/cake_rectangle.svg");
+//    final Widget cakeSvgIcon = new SvgPicture.asset("assets/images/cake_rectangle.svg");
 
     return Scaffold(
       appBar: AppBar(
@@ -99,11 +105,11 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 50.0,
             child: Image.asset("assets/images/cake_cup.png"),
           ),
-          SizedBox(
-            width: 50.0,
-            height: 50.0,
-            child: cakeRectangle,
-          ),
+//          SizedBox(
+//            width: 50.0,
+//            height: 50.0,
+//            child: cakeSvgIcon,
+//          ),
           RandomWordsWidget(),
           Text.rich(TextSpan(children: [
             TextSpan(text: "Home: "),
